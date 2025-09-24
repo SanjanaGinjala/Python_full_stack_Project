@@ -20,7 +20,7 @@ A Python-powered tool that turns raw datasets into easy-to-understand charts and
 TRENDTELLER/
 |
 |---src/            # core application logic
-|   |---logic.py    # Buisiness logic and task
+|   |---logic.py    # Business logic and task
 operations
 |   |__db.py        # Database operations
 |
@@ -52,7 +52,7 @@ git clone <repository-url>
 
 ### 2.Install Dependencies
 
-# Install all required python packages
+# Install Dependencies
 pip install -r requirements.txt
 
 ### 3.Set Up a Supabase Database
@@ -78,7 +78,7 @@ pip install -r requirements.txt
 
 ### 4.Configure Environment Variables
 
-1.create a `.env  ` file in the project root
+1.create a `.env` file in the project root
 
 2.Add your Supabase credentials to `.env`:
 SUPABASE_URL="https:/...."
@@ -90,7 +90,7 @@ streamlit run frontend/app.py
 
 The app will open in your browser at `http://localhost:8501`
 
-## FastAPU Backend
+## FastAPI Backend
 
 cd api
 python main.py
