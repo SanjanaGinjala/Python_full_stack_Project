@@ -36,7 +36,7 @@ operations
 |
 |____.env           # python Variables
 
-## Quck Start
+## Quick Start
 
 ### Prerequisites
 
@@ -59,7 +59,7 @@ pip install -r requirements.txt
 
 1.Create a Supabase Project:
 
-2.Create the Tasks Table:
+2.Create the datasets table in SQL Editor:
 - Go to the SQL Editor in your Supabase dashboard
 -Run this SQL Command:
 
@@ -73,3 +73,76 @@ pip install -r requirements.txt
 );
 
 '''
+
+3. **Get Your Credentials:
+
+### 4.Configure Environment Variables
+
+1.create a `.env  ` file in the project root
+
+2.Add your Supabase credentials to `.env`:
+SUPABASE_URL="https:/...."
+SUPABASE_KEY="..."
+### 5.Run the Application
+
+## Streamlit Frontend
+streamlit run frontend/app.py
+
+The app will open in your browser at `http://localhost:8501`
+
+## FastAPU Backend
+
+cd api
+python main.py
+
+The API will be available at `http://localhost:8000`
+
+## How to Use
+---Upload a CSV file through the Streamlit interface.
+
+---View the dataset preview, charts, and generated summaries.
+
+---Save the dataset and insights to Supabase for later access.
+
+## Technical Details:
+
+### Technologies used
+
+**Frontend**:Streamlit (Python web frameworj)
+**Backend**: fastAPI (Python REST API framework)
+**Database**:Supabase(PostgreSQL-based backend-as-a-service)
+**Language**:Python 3.8+
+
+
+### Key Components
+
+1.**`src/db.py`**: Database operations 
+-Handles all CRUD operations with Supabase
+
+2.**`src/logic.py`** : Buisiness logic 
+-Task validation and processing
+
+## Troubleshooting
+
+## Common Issues
+
+1.**"Module not Found" errors**
+    -Make sure you've installed all dependencies:`pip install -r requirements.txt`
+
+## Future Enhancements
+
+Ideas for Extending this projects:
+
+---Interactive dashboard for multiple datasets
+
+---AI-powered natural language summaries
+
+---Multi-user support
+
+---Export insights and charts as PDF or Excel
+
+---Advanced anomaly detection
+
+## Support
+
+If you encounter any issues or have questions:..
