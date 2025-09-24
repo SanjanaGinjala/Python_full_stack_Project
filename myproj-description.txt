@@ -1,0 +1,27 @@
+TITLE---TrendTeller: Data Speaks
+
+Description:A Python-powered tool that turns raw datasets into easy-to-understand charts and summaries. Upload your CSV, and TrendTeller automatically generates visualizations and key insights, helping you understand trends and anomalies in your data — all stored and managed with Supabase.
+
+Table: datasets
+
+Purpose: Store the raw CSV data uploaded by the user. This is the core table, since TrendTeller analyzes this data.
+
+Column Name	Data Type	Description	Example
+id		integer (PK)	
+name		text	
+
+uploaded_by	text	
+data		json	
+
+uploaded_at	timestamp	
+  
+Table: insights
+`	
+Purpose: Store the generated insights and charts for each dataset.
+
+Column Name	Data Type	Description	Example
+id		integer (PK)	
+dataset_id	integer (FK)	
+summary		text	
+charts		json	
+generated_at	timestamp	Time insights were generated	2025-09-24 11:00
