@@ -63,7 +63,7 @@ pip install -r requirements.txt
 - Go to the SQL Editor in your Supabase dashboard
 -Run this SQL Command:
 
-'''
+```
     CREATE TABLE datasets (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -71,8 +71,7 @@ pip install -r requirements.txt
     data JSON NOT NULL,
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-'''
+```
 
 3. **Get Your Credentials:
 
