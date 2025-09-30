@@ -1,70 +1,55 @@
-import os
-from supabase import create_client
-from dotenv import load_dotenv
+# Simple in-memory DB for testing
 
-load_dotenv()
-url = os.getenv("SUPABASE_URL")
-key = os.getenv("SUPABASE_KEY")
+class DatabaseManager:
+    def __init__(self):
+        self.datasets = {}
+        self.insights = {}
+        self.dataset_counter = 1
+        self.insight_counter = 1
 
-supabase = create_client(url, key)
+    # Dataset methods
+    def save_dataset(self, name, uploaded_by, data):
+        dataset_id = self.dataset_counter
+        self.datasets[dataset_id] = {
+            "id": dataset_id,
+            "name": name,
+            "uploaded_by": uploaded_by,
+            "data": data
+        }
+        self.dataset_counter += 1
+        return True
 
+    def get_all_datasets(self):
+        return list(self.datasets.values())
 
-# Dataset functions
-def save_dataset(name, uploaded_by, data):
-    response = supabase.table("datasets").insert({
-        "name": name,
-        "uploaded_by": uploaded_by,
-        "data": data
-    }).execute()
-    return response
+    def get_dataset_by_id(self, dataset_id):
+        return self.datasets.get(dataset_id)
 
-def get_all_datasets():
-    response = supabase.table("datasets").select("*").execute()
-    return response.data
+    def delete_dataset(self, dataset_id):
+        if dataset_id in self.datasets:
+            del self.datasets[dataset_id]
+            return True
+        return False
 
-def get_dataset_by_id(dataset_id):
-    response = supabase.table("datasets").select("*").eq("id", dataset_id).execute()
-    return response.data[0] if response.data else None
+    # Insight methods
+    def save_insight(self, dataset_id, summary, charts=None):
+        if dataset_id not in self.datasets:
+            return False
+        insight_id = self.insight_counter
+        self.insights[insight_id] = {
+            "id": insight_id,
+            "dataset_id": dataset_id,
+            "summary": summary,
+            "charts": charts or {}
+        }
+        self.insight_counter += 1
+        return True
 
-def delete_dataset(dataset_id):
-    response = supabase.table("datasets").delete().eq("id", dataset_id).execute()
-    return response
+    def get_insights_by_dataset(self, dataset_id):
+        return [insight for insight in self.insights.values() if insight["dataset_id"] == dataset_id]
 
-
-# Insights functions
-def save_insight(dataset_id, summary, charts=None):
-    response = supabase.table("insights").insert({
-        "dataset_id": dataset_id,
-        "summary": summary,
-        "charts": charts
-    }).execute()
-    return response
-
-def get_insights_by_dataset(dataset_id):
-    response = supabase.table("insights").select("*").eq("dataset_id", dataset_id).execute()
-    return response.data
-
-def delete_insight(insight_id):
-    response = supabase.table("insights").delete().eq("id", insight_id).execute()
-    return response
-
-
-# Users functions
-def create_user(username, email):
-    response = supabase.table("users").insert({
-        "username": username,
-        "email": email
-    }).execute()
-    return response
-
-def get_all_users():
-    response = supabase.table("users").select("*").execute()
-    return response.data
-
-def get_user_by_id(user_id):
-    response = supabase.table("users").select("*").eq("id", user_id).execute()
-    return response.data[0] if response.data else None
-
-def delete_user(user_id):
-    response = supabase.table("users").delete().eq("id", user_id).execute()
-    return response
+    def delete_insight(self, insight_id):
+        if insight_id in self.insights:
+            del self.insights[insight_id]
+            return True
+        return False
